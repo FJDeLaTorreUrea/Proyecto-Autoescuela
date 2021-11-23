@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Crear nuevo usuario</title>
+</head>
+<body>
+    <h1>Alta de usuario</h1>
+    <form action="php/InsertarUsuario.php" method="post">
+        <label for="html">Email</label><br>
+        <input type="text" name="IEmail" id="IEmail">
+        <p> </p>
+        <label for="html">Nombre</label><br>
+        <input type="text" name="INombre" id="INombre"><br>
+        <p> </p>
+        <label for="html">Primer apellido</label><br>
+        <input type="text" name="IAp1" id="IAp1"><br>
+        <p> </p>
+        <label for="html">Segundo apellido</label><br>
+        <input type="text" name="IAp2" id="IAp2"><br>
+        <p> </p>
+        <label for="html">Contraseña</label><br>
+        <input type="password" name="IPassw" id="IPassw"><br>
+        <p> </p>
+        <label for="html">Confirmar contraseña</label><br>
+        <input type="password" name="IConfir" id="IConfir"><br>
+        <p> </p>
+        <label for="html">Fecha de Nacimiento</label><br>
+        <input type="date" name="IFecha" id="IFecha"><br>
+        <p> </p>
+        <input type="submit" name="IAceptar" id="IAceptar">
+
+
+
+
+    </form>
+</body>
+</html>
