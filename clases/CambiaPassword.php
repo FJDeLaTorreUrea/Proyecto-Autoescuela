@@ -1,5 +1,5 @@
 <?php
-    require_once("../B_D/conexion.php");
+    require_once("../cargadores/cargaBD.php");
     $Nueva_passw=$_POST["InNueva"];
     $Confirmar_passw=$_POST["InConfirmar"];
 

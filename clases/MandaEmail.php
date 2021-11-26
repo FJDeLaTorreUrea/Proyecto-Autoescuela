@@ -1,6 +1,6 @@
 <?php   
     use PHPMailer\PHPMailer\PHPMailer;
-    function mandaCorreo($email_usuario,$mensaje,$encabezado)
+    function MandaEmail($email_usuario,$mensaje,$encabezado)
     {
         require "../vendor/autoload.php";
         $mail = new PHPMailer();

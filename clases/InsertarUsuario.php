@@ -1,6 +1,6 @@
 <?php
-    require_once("usuario_alta.php");
-    require_once("../B_D/conexion.php");
+    require_once("../cargadores/cargaclases.php");
+    require_once("../cargadores/cargaBD.php");
     if($_POST["IPassw"]==$_POST["IConfir"])
     {
         $email=$_POST["IEmail"];
@@ -27,8 +27,7 @@
 
 
 
-        $nuevo_usuario= new Usuario($email,$nombre,$ap1,$ap2,$passw,$fechaNac_BD,"ADMIN",null);
-        Conexion::conectar();
+        $nuevo_usuario= new Usuario($email,$nombre,$ap1,$ap2,$passw,$fechaNac_BD,"ADMIN",null);;
         if(Conexion::InsertarUsuario($nuevo_usuario)==true)
         {
             echo"<script>alert('Usuario Insertado');window.history.go(-2);</script>";

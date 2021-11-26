@@ -1,60 +1,73 @@
-body{
-    padding: 0;
-    margin:0;
-    font-family: 'Ubuntu', sans-serif;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Ubuntu", sans-serif;
 }
 
-header{
-    margin: 3rem;
+header {
+  margin: 3rem;
 }
 
-nav ul{
-    list-style:none;
-    margin:0;
-    padding:0;
+.categoria {
+  display: inline-block;
 }
 
-nav ul li{
-    border:2px black solid;
+.submenu {
+  display: block;
 }
 
-nav ul a{
-    display:block;
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
-    padding: 10px;
-    letter-spacing: 1px;
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin: 0;
+  padding: 0;
 }
 
-nav ul li{
-    position:relative;
-    float:left;
-    margin: 0;
-    padding: 0;
+nav ul li {
+  border: 3px black solid;
+  border-radius: 2px;
+  position: relative;
+  margin-top: 10px;
 }
 
-nav ul ul{
-    overflow: hidden;
-    height: 0;
-    position:absolute;
-    top:100%;
-    left:0;
-    padding: 0;
-    
+nav ul li:hover {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background-color: lightgray;
 }
 
-nav ul ul li{
-    float: none;
-    width:130px;
+nav ul li:hover > ul {
+  height: 180px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-nav ul ul a{
-    line-height: 120%;
-    padding: 10px 15px;
+nav ul a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  padding: 10px;
+  letter-spacing: 1px;
 }
 
-nav ul li:hover >ul{
-    height: 180px;
-    transition: 0.5s;
+nav ul ul {
+  overflow: hidden;
+  height: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 0;
 }
+
+nav ul ul li {
+  float: none;
+  width: 130px;
+}
+
+nav ul ul a {
+  line-height: 120%;
+  padding: 10px 15px;
+}
+/*# sourceMappingURL=estilos.css.map */
