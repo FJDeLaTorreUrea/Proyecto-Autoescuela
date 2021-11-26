@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+}
+
+form{
+    margin-top: 20%;
+}
+input{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.5rem;
+    margin: 10px;
+}

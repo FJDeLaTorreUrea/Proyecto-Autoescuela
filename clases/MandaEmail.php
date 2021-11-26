@@ -1,7 +1,7 @@
 <?php   
-    public function($tucorreo,$Passw,$titulo,$encabezado,$sucorreo,$imagen,$titulo_imagen,$mensaje)
+    use PHPMailer\PHPMailer\PHPMailer;
+    function mandaCorreo($email_usuario,$mensaje,$encabezado)
     {
-        use PHPMailer\PHPMailer\PHPMailer;
         require "../vendor/autoload.php";
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -12,19 +12,19 @@
         $mail->Host       = "smtp.gmail.com";    
         $mail->Port       = 587;                 
         // introducir usuario de google
-        $mail->Username   = $tucorreo; 
+        $mail->Username   = "Thekisco1000@gmail.com"; 
         // introducir clave
-        $mail->Password   = $Passw;       
-        $mail->SetFrom($tucorreo, $titulo);
+        $mail->Password   = "Palaplay11";       
+        $mail->SetFrom("Thekisco1000@gmail.com","Autoescuela Los Monos");
         // asunto
-        $mail->Subject    = $encabezado;
+        $mail->Subject  = $encabezado;
     
         // adjuntos
-        $mail->addAttachment("adjunto.txt");
+        //$mail->addAttachment("adjunto.txt");
         // destinatario
-        $mail->AddAddress($sucorreo, "Test");
+        $mail->AddAddress($email_usuario);
         // añadir foto
-        $mail->AddEmbeddedImage($imagen,$titulo_imagen);
+        //$mail->AddEmbeddedImage($imagen,$titulo_imagen);
         // cuerpo
         $mail->MsgHTML($mensaje);
         // enviar

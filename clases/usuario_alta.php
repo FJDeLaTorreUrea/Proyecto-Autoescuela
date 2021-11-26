@@ -8,9 +8,8 @@
         protected $Fecha_nac;
         protected $Rol;
         protected $Recurso;
-        protected $Activo;
 
-        public function __construct($Email,$Nombre,$Ap1,$Ap2,$Password,$Fecha_nac,$Rol,$Recurso,$Activo)
+        public function __construct($Email,$Nombre,$Ap1,$Ap2,$Password,$Fecha_nac,$Rol,$Recurso)
         {
             $this->Email=$Email;
             $this->Nombre=$Nombre;
@@ -20,7 +19,6 @@
             $this->Fecha_nac=$Fecha_nac;
             $this->Rol=$Rol;
             $this->Recurso=$Recurso;
-            $this->Activo=$Activo;
         }
 
 
@@ -65,10 +63,7 @@
             return $this->Recurso;
         }
 
-        public function getActivo()
-        {
-            return $this->Activo;
-        }
+       
 
 
 
