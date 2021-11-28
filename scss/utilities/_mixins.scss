@@ -1,0 +1,27 @@
+@mixin tamano($largo,$ancho)
+{
+    height: $largo;
+    width:$ancho;
+}
+
+@mixin texto($fuente,$fuente_alternativa,$tamano,$estilo,$espaciado,$color,$color_fondo:none)
+{
+    font-family: $fuente,$fuente_alternativa;
+    font-size: $tamano;
+    font-style: $estilo;
+    letter-spacing:$espaciado;
+    color: $color;
+    background-color:$color_fondo;
+}
+
+@mixin bordes($tamano,$estilo,$color)
+{
+    border:$tamano $estilo $color;
+}
+
+
+
+
+
+
+

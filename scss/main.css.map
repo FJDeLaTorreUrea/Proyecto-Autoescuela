@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "mappings": "AIAA,AAAA,CAAC,CAAA;EACG,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,OAAO;CACtB;;ACJD,UAAU;EACN,WAAW,EAAE,QAAQ;EACrB,GAAG,EAAC,4EAA4E;;;ACFpF,AAAA,IAAI,CACJ;EACI,SAAS,ELOJ,MAAM;EKNX,WAAW,EAAC,mBAAmB;EAC/B,KAAK,ELCF,KAAK;EKAR,UAAU,EAAE,MAAM;CACrB;;AACD,AAAA,GAAG,CAAA;EACC,MAAM,EAAE,IAAI;CACf;;ACTD,AAAA,IAAI,CACJ;EACI,MAAM,EAAC,IAAI;CAGd;;AAED,AAAA,KAAK,CACL;EACI,MAAM,EAAC,IAAI;CACd;;AAED,AAAA,KAAK,CACL;EACI,MAAM,EAAE,IAAI;ELZZ,MAAM,EKaU,MAAM;ELZtB,KAAK,EKYkB,KAAK;EAC5B,SAAS,ENRJ,MAAM;ECUX,MAAM,EKGU,GAAG,CAAC,KAAK,CAAC,KAAK;CAClC;;AAVD,AAKI,KALC,AAKA,MAAM,CACP;EACI,gBAAgB,ENjBN,SAAS;CMkBtB",
+    "sources": [
+        "main.scss",
+        "utilities/_variables.scss",
+        "utilities/_mixins.scss",
+        "utilities/_mixins.scss",
+        "base/_reset.scss",
+        "base/_typo.scss",
+        "base/_base.scss",
+        "components/_formulario.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}

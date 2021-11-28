@@ -1,0 +1,23 @@
+form
+{
+    margin:30px;
+    
+   
+}
+
+label
+{
+    margin:10px;
+}
+
+input
+{
+    margin: 10px;
+    @include tamano(1.5rem,15rem);
+    font-size: $texto_s;
+    &:hover
+    {
+        background-color: $color_secundario;
+    }
+    @include bordes(3px,solid,black);
+}

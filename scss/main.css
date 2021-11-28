@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+}
+
+body {
+  font-size: 1.7rem;
+  font-family: "Ubuntu",sans-serif;
+  color: black;
+  text-align: center;
+}
+
+img {
+  margin: 15px;
+}
+
+form {
+  margin: 30px;
+}
+
+label {
+  margin: 10px;
+}
+
+input {
+  margin: 10px;
+  height: 1.5rem;
+  width: 15rem;
+  font-size: 1.2rem;
+  border: 3px solid black;
+}
+
+input:hover {
+  background-color: lightgrey;
+}
+/*# sourceMappingURL=main.css.map */
