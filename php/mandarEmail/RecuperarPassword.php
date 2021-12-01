@@ -5,7 +5,7 @@
     Conexion::conectar();
     if(Conexion::buscaEmail($correo)==true)
     {
-        MandaEmail($correo,"<a href='localhost/Proyecto-Autoescuela/password_olvidada/cambia_password/cambiar_password.html?id=${correo}'>Haga click para cambiar su contrase&ntilde;a</a>","Cambiar contraseña");
+        MandaEmail($correo,"<a href='localhost/Proyecto-Autoescuela/html/password_olvidada/cambia_password/cambiar_password.html?id=${correo}'>Haga click para cambiar su contrase&ntilde;a</a>","Cambiar contraseña");
     }
 
 

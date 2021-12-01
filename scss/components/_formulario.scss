@@ -1,7 +1,8 @@
 form
 {
     margin:30px;
-    
+    display: block;
+    clear: both;
    
 }
 
@@ -12,12 +13,61 @@ label
 
 input
 {
+    box-shadow: 2px 2px 10px black;
+    &:hover
+    {
+        background-color: $color_secundario;
+    }
+}
+
+input[type=text]
+{
     margin: 10px;
     @include tamano(1.5rem,15rem);
+    font-size: $texto_s;
+    @include bordes(3px,solid,black);
+}
+
+input[type=password]
+{
+    margin: 10px;
+    @include tamano(1.5rem,15rem);
+    font-size: $texto_s;
+    
+    @include bordes(3px,solid,black);
+}
+
+input[type=date]
+{
+    margin: 10px;
+    @include tamano(1.5rem,15rem);
+    font-size: $texto_s;
+    cursor: pointer;
+
+    @include bordes(3px,solid,black);
+}
+
+input[type=submit]
+{
+    cursor: pointer;
+    @include tamano(1.5rem,10rem);
     font-size: $texto_s;
     &:hover
     {
         background-color: $color_secundario;
     }
     @include bordes(3px,solid,black);
+}
+
+select
+{
+    margin: 10px;
+    @include tamano(1.5rem,10rem);
+    font-size: $texto_s;
+    &:hover
+    {
+        background-color: $color_secundario;
+    }
+    @include bordes(3px,solid,black);
+
 }

@@ -3,11 +3,24 @@
     $usuario=$_POST["InId"];
     $contrasena=$_POST["InPassw"];
     Conexion::conectar();
-    if(Conexion::Login($usuario,$contrasena)==true)
+    if(filter_var($usuario, FILTER_VALIDATE_EMAIL))
     {
-        echo"<script>alert('Usuario encontrado');</script>";
-        header("Location:../../html/Pagina_principal/Pagina_principaal.html");
-        
+        if(Conexion::Login($usuario,$contrasena)==true)
+        {
+            echo"<script>alert('Usuario encontrado');</script>";
+            header("Location:../../html/Pagina_principal/Pagina_principaal.html");
+        }
+        else
+        {
+            echo "<script>alert('Usuario no encontrado');
+            window.history.go(-1)</script>";
+        }
     }
+    else
+    {
+        echo "Email no valido";    
+    }
+
+    
 
 ?>

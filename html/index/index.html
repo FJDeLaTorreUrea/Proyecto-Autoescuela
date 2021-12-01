@@ -5,21 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="imagenes/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../scss/main.css">
+    <script src="../../Js/AjaxLogin.js"></script>
     <title>Autoescuela los monos</title>
 </head>
 <body>
-    <header><img src="imagenes/index_imagen.png" alt="Imagen de presentacion"></header>
+    <img src="imagenes/index_imagen.png" alt="Imagen de presentacion">
+
     <form action="../../php/Login/Login.php" method="post">
+        
         <label for="html">Usuario/email</label><br>
-        <input type="text" id="InId" name="InId"><br>
+        <input type="text" id="InId" name="InId" required=""><br>
+        <blockquote id="compruebaUsuario"></blockquote>
 
         <label for="html">Contraseña</label><br>
-        <input type="password" id="InPassw" name="InPassw"><br>
-        <p> </p>
+        <input type="password" id="InPassw" name="InPassw" required=""><br>
+        <blockquote id="compruebaPassword"></blockquote>
+
         <input type="submit" value="aceptar" id="BotonAceptar" name="BotonAceptar">
     </form>
     

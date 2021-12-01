@@ -62,13 +62,5 @@
         {
             return $this->Recurso;
         }
-
-       
-
-
-
-
-
-
     }
 ?>

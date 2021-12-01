@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="../../../scss/main.css">
     <title>Crear nuevo usuario</title>
 </head>
 <body>
-    <h1>Alta de usuario</h1>
-    <form action="../../../clases/InsertarUsuario.php" method="post">
+    <header>
+        <img class="izquierda" src="imagenes/Imagen_pagina (2).jpg" height="200px">
+        <h1 class="titulo">Autoescuela Los Monos</h1>
+        <br>
+    </header>
+    <form action="../../../php/Usuario/CreaUsuario.php" method="post">
         <label for="html">Email</label><br>
         <input type="text" name="IEmail" id="IEmail">
         <p> </p>
@@ -22,15 +26,16 @@
         <label for="html">Segundo apellido</label><br>
         <input type="text" name="IAp2" id="IAp2"><br>
         <p> </p>
-        <label for="html">Contraseña</label><br>
-        <input type="password" name="IPassw" id="IPassw"><br>
-        <p> </p>
-        <label for="html">Confirmar contraseña</label><br>
-        <input type="password" name="IConfir" id="IConfir"><br>
-        <p> </p>
         <label for="html">Fecha de Nacimiento</label><br>
         <input type="date" name="IFecha" id="IFecha"><br>
         <p> </p>
+        <label for="html">Rol</label><br>
+        <select name="" id="">
+            <option value="">Admin</option>
+            <option value="">Usuario</option>
+        </select>
+        <br>
+
         <input type="submit" name="IAceptar" id="IAceptar">
 
 

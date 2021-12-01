@@ -42,6 +42,7 @@
             }
         }
 
+    
         public static function Login($Email,$contrasena)
         {
             $consulta="SELECT * FROM usuarios WHERE Email='${Email}' AND Passw='${contrasena}';";
@@ -95,6 +96,17 @@
             }
 
             var_dump(self::$conn->errorInfo());
+        }
+
+
+
+
+        
+        public static function ConsultaSQL($consulta)
+        {
+            $resultado=self::$conn->exec($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro;
         }
 
     }

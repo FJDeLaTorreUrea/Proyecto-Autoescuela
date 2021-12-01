@@ -2,7 +2,7 @@
     use PHPMailer\PHPMailer\PHPMailer;
     function MandaEmail($email_usuario,$mensaje,$encabezado)
     {
-        require "../vendor/autoload.php";
+        require "../../vendor/autoload.php";
         $mail = new PHPMailer();
         $mail->IsSMTP();
         // cambiar a 0 para no ver mensajes de error
