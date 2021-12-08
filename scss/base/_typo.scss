@@ -1,9 +1,27 @@
-@font-face {
-    font-family: "Ubuntu";
-    src:url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-}
+// @font-face {
+//     font-family: "Ubuntu";
+//     src:url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+// }
+
+// @font-face {
+//     font-family: "Estonia";
+//     src: url('https://fonts.googleapis.com/css2?family=Estonia&display=swap');
+// }
 
 @font-face {
-    font-family: "Estonia";
-    src: url('https://fonts.googleapis.com/css2?family=Estonia&display=swap');
-}
+    font-family: 'Estonia';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/estonia/v5/7Au_p_4ijSecA1yHOCr2z3wM.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoC1CzjvWyNL4U.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }

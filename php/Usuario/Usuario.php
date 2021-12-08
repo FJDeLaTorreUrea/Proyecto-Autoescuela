@@ -9,13 +9,23 @@
         protected $Rol;
         protected $Recurso;
 
-        public function __construct($Email,$Nombre,$Ap1,$Ap2,$Password,$Fecha_nac,$Rol,$Recurso)
+        public function __construct($Email,$Nombre,$Ap1,$Ap2,$Fecha_nac,$Rol,$Recurso)
         {
             $this->Email=$Email;
             $this->Nombre=$Nombre;
             $this->Ap1=$Ap1;
             $this->Ap2=$Ap2;
-            $this->Password=$Password;
+
+            //codigo especial
+            //-------------------------
+            $fechatotal= new DateTime();
+            $HoraArray = (array) $fechatotal;
+            $hora=$HoraArray["date"];
+            $alter=rand(0,50000);
+            $codigoEspecial=md5($hora.$alter);
+            //--------------------------
+
+            $this->Password=$codigoEspecial;
             $this->Fecha_nac=$Fecha_nac;
             $this->Rol=$Rol;
             $this->Recurso=$Recurso;

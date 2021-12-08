@@ -8,7 +8,7 @@
         {
             try {
                 self::$conn = new PDO('mysql:host=localhost;dbname=autoescuela', "root","");
-                echo "Conexion correcta";
+                
             } catch (PDOException $error) {
                 echo "Conexion fallida" . $error->getMessage();
             }
@@ -28,19 +28,47 @@
             
 
 
-            $consulta="INSERT INTO usuarios(Id,Email,Nombre,Ap1,Ap2,Passw,FechaNac,Rol,Recurso) VALUES(default,'$email','$nombre','$Ap1','$Ap2','$Pass','$Fecha','$Rol','$Recurso');";
+            $consulta="INSERT INTO usuarios(Id,Email,Nombre,Ap1,Ap2,Passw,FechaNac,Rol,Recurso) VALUES(default,'${email}','${nombre}','${Ap1}','${Ap2}','${Pass}','${Fecha}','${Rol}','${Recurso}');";
             $resultado=self::$conn->exec($consulta);
-            if ($resultado) 
-            {
-                echo "Consulta realizada";
-                return true;
-            }
-            else
-            {
-                echo "Consulta no realizada";
-                return false;
-            }
+            return self::$conn->errorInfo();
         }
+
+        public static function InsertarUsuario_Temporal($usuario_temporal)
+        {
+            $password_temporal=$usuario_temporal->getPassword_temporal();
+            $id_usuario=$usuario_temporal->getId_usuario();
+            $Fecha_exp=$usuario_temporal->getFecha_expiracion();
+
+            $consulta="INSERT INTO alumno_sin_confirmar(Id_usuario,password,Fecha_expiracion) VALUES ('${id_usuario}','${password_temporal}','${Fecha_exp}');";
+            $resultado=self::$conn->exec($consulta);
+            return self::$conn->errorInfo();
+           
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
         public static function Login($Email,$contrasena)
@@ -69,23 +97,21 @@
 
             if($registro["Email"]==$Email)
             {
-                echo "Email encontrado";
                 return true;
             }
             else
             {
-                echo "Email no encontrado";
                 return false;
             }
         }
 
-        public static function cambiaPassword($nuevaPassw,$Confirmar)
+        public static function cambiaPassword($id,$nuevaPassw)
         {
                 
-            $email=$_GET["id"];
-            $consulta="UPDATE usuarios SET Passw='${nuevaPassw}' WHERE Email='${email}'";
+            
+            $consulta="UPDATE usuarios SET Passw='${nuevaPassw}' WHERE Passw='${id}'";
             $resultado=self::$conn->exec($consulta);
-
+            var_dump(self::$conn->errorInfo());
             if($resultado)
             {
                 return true;
@@ -99,15 +125,22 @@
         }
 
 
+        public static function buscaID($usuario)
+        {
+            $password=$usuario->getPassword();
+            $consulta="SELECT Id FROM usuarios WHERE Passw='${password}'";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Id"];
+        }
+
+        
+
+
 
 
         
-        public static function ConsultaSQL($consulta)
-        {
-            $resultado=self::$conn->exec($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-            return $registro;
-        }
+      
 
     }
 ?>

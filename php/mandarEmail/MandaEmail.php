@@ -31,9 +31,7 @@
         $resul = $mail->Send();
         if(!$resul) {
         echo "Error" . $mail->ErrorInfo;
-        } else {
-        echo "Enviado";
-        }
+        } 
 
     }
     

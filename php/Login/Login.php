@@ -1,25 +1,54 @@
 <?php
-    require "../cargadores/cargaBD.php";
+    require_once("../cargadores/cargaBD.php");
+    require_once("../cargadores/cargaSesiones.php");
+
     $usuario=$_POST["InId"];
-    $contrasena=$_POST["InPassw"];
+    $password=$_POST["InPassw"];
+
     Conexion::conectar();
-    if(filter_var($usuario, FILTER_VALIDATE_EMAIL))
+    if(filter_var($usuario,FILTER_VALIDATE_EMAIL))
     {
-        if(Conexion::Login($usuario,$contrasena)==true)
+        if(Conexion::Login($usuario,$password))
         {
-            echo"<script>alert('Usuario encontrado');</script>";
-            header("Location:../../html/Pagina_principal/Pagina_principaal.html");
+            echo Conexion::Login($usuario,$password);
         }
-        else
+        else 
         {
-            echo "<script>alert('Usuario no encontrado');
-            window.history.go(-1)</script>";
+            echo "Credenciales no validas";
         }
+        
     }
-    else
+
+    else 
     {
-        echo "Email no valido";    
+        echo "Email no valido";
     }
+    
+    
+
+
+
+    // require "../cargadores/cargaBD.php";
+    // $usuario=$_POST["InId"];
+    // $contrasena=$_POST["InPassw"];
+    // Conexion::conectar();
+    // if(filter_var($usuario, FILTER_VALIDATE_EMAIL))
+    // {
+    //     if(Conexion::Login($usuario,$contrasena)==true)
+    //     {
+    //         echo"<script>alert('Usuario encontrado');</script>";
+    //         header("Location:../../html/Pagina_principal/Pagina_principaal.html");
+    //     }
+    //     else
+    //     {
+    //         echo "<script>alert('Usuario no encontrado');
+    //         window.history.go(-1)</script>";
+    //     }
+    // }
+    // else
+    // {
+    //     echo "Email no valido";    
+    // }
 
     
 

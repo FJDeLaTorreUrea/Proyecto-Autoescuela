@@ -5,15 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../scss/main.css">
+    <script src="../../../Js/AjaxInsertaUsuario.js"></script>
     <title>Crear nuevo usuario</title>
 </head>
 <body>
     <header>
-        <img class="izquierda" src="imagenes/Imagen_pagina (2).jpg" height="200px">
+        <img class="izquierda" src="../../../recursos/imagenes/Imagen_alta_usuario.png" height="200px">
         <h1 class="titulo">Autoescuela Los Monos</h1>
         <br>
     </header>
-    <form action="../../../php/Usuario/CreaUsuario.php" method="post">
+    <form action="" method="post" id="form1">
+        <span id="notificacion"></span><br>
+        <p> </p>
         <label for="html">Email</label><br>
         <input type="text" name="IEmail" id="IEmail">
         <p> </p>
@@ -30,9 +33,9 @@
         <input type="date" name="IFecha" id="IFecha"><br>
         <p> </p>
         <label for="html">Rol</label><br>
-        <select name="" id="">
-            <option value="">Admin</option>
-            <option value="">Usuario</option>
+        <select name="SRol" id="SRol">
+            <option value="1">Admin</option>
+            <option value="2" selected="selected">Usuario</option>
         </select>
         <br>
 

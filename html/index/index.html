@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="imagenes/favicon.ico">
+    <link rel="icon" href="../../recursos/imagenes/favicon.ico">
     <link rel="stylesheet" href="../../scss/main.css">
     <script src="../../Js/AjaxLogin.js"></script>
     <title>Autoescuela los monos</title>
 </head>
 <body>
-    <img src="imagenes/index_imagen.png" alt="Imagen de presentacion">
+    <img src="../../recursos/imagenes/index_imagen.png" alt="Imagen de presentacion">
 
-    <form action="../../php/Login/Login.php" method="post">
+    <form action="" method="post" id="formLogin">
+        
+
+        <span id="nada" ></span><br>
         
         <label for="html">Usuario/email</label><br>
         <input type="text" id="InId" name="InId" required=""><br>
-        <blockquote id="compruebaUsuario"></blockquote>
+        
 
         <label for="html">Contraseña</label><br>
         <input type="password" id="InPassw" name="InPassw" required=""><br>
-        <blockquote id="compruebaPassword"></blockquote>
+        
 
         <input type="submit" value="aceptar" id="BotonAceptar" name="BotonAceptar">
     </form>
-    
+
     <footer>
         <a href="../password_olvidada/recupera_passsw.html">¿Has olvidado tu constraseña?</a>
     </footer>
