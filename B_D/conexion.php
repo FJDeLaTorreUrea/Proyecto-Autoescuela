@@ -14,7 +14,7 @@
             }
         }
 
-        //Metodos usuario
+        //Metodos para INSERTAR
         public static function InsertarUsuario($usuario)
         {
             $email=$usuario->getEmail();
@@ -46,44 +46,30 @@
 
         }
 
+        public static function InsertarTematica($tematica)
+        {
+            $Nombre_tematica=$tematica->getTematica();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            $consulta="INSERT INTO tematica(Id,Tema) VALUES (default,'${Nombre_tematica}')";
+            $resultado=self::$conn->exec($consulta);
+            return self::$conn->errorInfo();
+        }
 
     
         public static function Login($Email,$contrasena)
         {
             $consulta="SELECT * FROM usuarios WHERE Email='${Email}' AND Passw='${contrasena}';";
             $resultado=self::$conn->query($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-            if($registro["Email"]==$Email && $registro["Passw"]==$contrasena)
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
             {
-                return true;
+                if($registro["Email"]==$Email && $registro["Passw"]==$contrasena)
+                {
+                    return true;
+                }
+                
             }
-            else
-            {
-                return false;
-            }
+            
+            
             // while($registro = $resultado->fetch(PDO::FETCH_OBJ)){
                 
             // }
@@ -132,6 +118,113 @@
             $resultado=self::$conn->query($consulta);
             $registro=$resultado->fetch(PDO::FETCH_ASSOC);
             return $registro["Id"];
+        }
+
+        public static function buscaTematica($tematica)
+        {
+            $nombre_tematica=$tematica->getTematica();
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->query($consulta);
+            
+           
+            while($registro = $resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                if($registro["Tema"]==$nombre_tematica)
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        public static function cuentaPaginasUsuario()
+        {
+            $consulta="SELECT * FROM usuarios ;";
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            $tamano=4;
+            $numero_filas=$resultado->rowCount();
+
+
+            $total_paginas=ceil($numero_filas/$tamano);
+            return $total_paginas;
+        }
+
+
+
+
+
+
+        public static function DevuelveUsuarios($pagina)
+        {
+            
+            $consulta="SELECT * FROM usuarios ;";
+
+            $tamano=4;
+            
+            
+            
+            $comienzo=($pagina-1)*$tamano;
+
+            
+            
+            
+
+
+
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            
+
+            
+
+        
+
+            
+
+            $resultado->closeCursor();
+
+            $consulta_con_limite="SELECT * FROM usuarios LIMIT $comienzo,$tamano";
+
+            
+            $resultado=self::$conn->prepare($consulta_con_limite);
+            $resultado->execute(array());
+
+           
+           
+            $a= new stdClass;
+            $a->usuarios=array();
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+
+                
+
+                $valores= new stdClass;
+                $valores->Id=$registro["Id"];
+                $valores->Email=$registro["Email"];
+                $valores->Nombre=$registro["Nombre"];
+                $valores->Ap1=$registro["Ap1"];
+                $valores->Ap2=$registro["Ap2"];
+                $valores->Fecha_nac=$registro["FechaNac"];
+                $valores->Rol=$registro["Rol"];
+
+                
+                array_push($a->usuarios,$valores);
+                
+            
+            
+            }
+            
+            $JSON=json_encode($a);
+            return $a;
+            
+
         }
 
         

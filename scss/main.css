@@ -196,14 +196,44 @@ header {
 
 header img {
   float: left;
-  height: 300px;
+  height: 50px;
 }
 
 header h1 {
-  font-family: "Estonia",normal;
-  text-align: center;
-  padding-top: 4rem;
-  padding-right: 3rem;
-  padding-bottom: 200px;
+  font-family: "Estonia",sans-serif;
+  text-align: right;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 30px;
+}
+
+table {
+  width: 90%;
+  table-layout: fixed;
+  text-align: left;
+  border: 2px solid black;
+  margin: 2rem;
+  font-size: 1.2rem;
+}
+
+table thead th {
+  width: 15%;
+}
+
+table th, table td {
+  padding: 40px;
+  width: 15%;
+}
+
+tr {
+  border: 2px solid black;
+}
+
+td {
+  border: 2px solid black;
+}
+
+span {
+  cursor: pointer;
 }
 /*# sourceMappingURL=main.css.map */

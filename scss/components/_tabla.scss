@@ -1,0 +1,36 @@
+table{
+    width: 90%;
+    table-layout: fixed;
+    text-align: left;
+
+    @include bordes(2px,solid,black);
+    margin:2rem;
+    font-size: $texto_s;
+    thead th {
+        width: 15%;
+      }
+      
+      
+      
+      th, td {
+        padding: 40px;
+        width: 15%;
+      }
+    
+}
+
+
+
+
+tr{
+    @include bordes(2px,solid,black)
+    
+}
+
+td{
+    @include bordes (2px,solid,black)
+}
+
+span{
+  cursor: pointer;
+}

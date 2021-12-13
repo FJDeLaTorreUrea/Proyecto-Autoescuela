@@ -31,7 +31,7 @@ window.addEventListener("load",function(ev)
                     }
                     else
                     {
-                        window.location=("../Pagina_principal/Pagina_principal.html");
+                        window.location=("../Pagina_principal/Pagina_principal.php");
                     }
                     
                      

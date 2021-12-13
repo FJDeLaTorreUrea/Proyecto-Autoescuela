@@ -10,7 +10,11 @@
     {
         if(Conexion::Login($usuario,$password))
         {
+            session_start();
+            $_SESSION["usuario"]=$usuario;
+            
             echo Conexion::Login($usuario,$password);
+            
         }
         else 
         {

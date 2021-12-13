@@ -12,10 +12,10 @@
         $mail->Host       = "smtp.gmail.com";    
         $mail->Port       = 587;                 
         // introducir usuario de google
-        $mail->Username   = "Thekisco1000@gmail.com"; 
+        $mail->Username   = "autoescuelalosmonos@gmail.com"; 
         // introducir clave
-        $mail->Password   = "Palaplay11";       
-        $mail->SetFrom("Thekisco1000@gmail.com","Autoescuela Los Monos");
+        $mail->Password   = "TorreUrea2000";       
+        $mail->SetFrom("autoescuelalosmonos@gmail.com","Autoescuela Los Monos");
         // asunto
         $mail->Subject  = $encabezado;
     

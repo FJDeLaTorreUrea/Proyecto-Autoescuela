@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="favicon" href="../../recursos/imagenes/favicon.ico">
     <link rel="stylesheet" href="../../scss/main.css">
+    <script src="../../Js/AjaxInsertaTematica.js"></script>
     <title>Alta de tematica</title>
 </head>
 <body>
@@ -33,7 +34,7 @@
                 <a href="">Preguntas</a>
                 <ul class="submenu">
                     <li><a href="">Alta de pregunta</a></li>
-                    <li><a href="">Alta masiva de usuario</a></li>
+                    <li><a href="">Alta masiva de preguntas</a></li>
                 </ul>
             </li>
             <li class="categoria">
@@ -46,11 +47,11 @@
         </ul>
     </nav>
     <form action="">
+        <span id="comprobador"></span><br>
+        <p> </p>
         <label for="html">Nombre</label><br>
-        <input type="text" >
-
-
-
+        <input type="text" id="NombreTematica"><br>
+        <input type="submit" id="confirmar">
     </form>
 </body>
 </html>

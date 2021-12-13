@@ -10,15 +10,23 @@
     <title>Inicio</title>
 </head>
 <body>
+    <?php
+        session_start();
+        if(!isset($_SESSION["usuario"]))
+        {
+            header("Location:../index/Index.html");
+        }
+    ?>
+
     <header>
-        <img class="izquierda" src="../../recursos/imagenes/Imagen_pagina (2).jpg" height="200px">
+        <img class="izquierda" src="../../recursos/imagenes/Imagen_header.png" height="200px">
         <h1 class="titulo">Autoescuela Los Monos</h1>
         <br>
     </header>
         <nav>
             <ul>
                 <li class="categoria">
-                    <a href="">Usuarios</a>
+                    <a href="../usuarios/Registros_usuarios.html">Usuarios</a>
                     <ul class="submenu">
                         <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.html">Alta de usuario</a></li>
                         <li><a href="">Alta masiva de usuario</a></li>
@@ -27,7 +35,7 @@
                 <li class="categoria">
                     <a href="">Temáticas</a> 
                     <ul class="submenu">
-                        <li><a href="">Alta de temática</a></li>
+                        <li><a href="../alta_tematica/tematica.html">Alta de temática</a></li>
                     </ul>
                 </li>
                 <li class="categoria">
