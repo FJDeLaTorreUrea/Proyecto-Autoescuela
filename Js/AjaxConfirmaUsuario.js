@@ -32,7 +32,7 @@ window.addEventListener("load",function(ev){
                     }
 
                 }
-                ajax.open("POST","../../php/Usuario/ConfirmaUsuario.php");
+                ajax.open("POST","../../php/Usuario/ConfirmaUsuario.php"+window.location.search);
                 ajax.send(form1);
             }
             else

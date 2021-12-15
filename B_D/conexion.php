@@ -55,6 +55,60 @@
             return self::$conn->errorInfo();
         }
 
+        public static function InsertarPregunta($pregunta)
+        {
+            $enunciado=$pregunta->getEnunciado();
+            $recurso=$pregunta->getRecurso();
+            $Id_respuesta=$pregunta->getId_repuesta();
+            $id_tematica=$pregunta->getId_tematica();
+            $id_propio=$pregunta->getId_propio();
+
+
+
+
+            $consulta="INSERT INTO pregunta(Id,Enunciado,Recurso,Id_respuesta,Id_tematica,Id_propio) VALUES (default,'${enunciado}','${recurso}',null,'${id_tematica}','${id_propio}');";
+            $resultado=self::$conn->exec($consulta);
+            
+        
+        }
+
+        public static function InsertaRespuestas($array_preguntas,$Id_pregunta,$correcta)
+        {
+            for ($i=0; $i<4 ; $i++) 
+            { 
+                
+                $pregunta=$array_preguntas[$i];
+                
+                if($i==$correcta-1)
+                {
+                    $consulta="INSERT INTO respuesta(Id,Enunciado,Id_pregunta,correcta) VALUES (default,'${pregunta}','${Id_pregunta}','1')";
+                    $resultado=self::$conn->exec($consulta);
+                
+                    
+                }
+                else 
+                {
+                    $consulta="INSERT INTO respuesta(Id,Enunciado,Id_pregunta,correcta) VALUES (default,'${pregunta}','${Id_pregunta}','0')";
+                    $resultado=self::$conn->exec($consulta);
+                    
+                }
+                
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     
         public static function Login($Email,$contrasena)
         {
@@ -93,11 +147,8 @@
 
         public static function cambiaPassword($id,$nuevaPassw)
         {
-                
-            
             $consulta="UPDATE usuarios SET Passw='${nuevaPassw}' WHERE Passw='${id}'";
             $resultado=self::$conn->exec($consulta);
-            var_dump(self::$conn->errorInfo());
             if($resultado)
             {
                 return true;
@@ -107,7 +158,20 @@
                 return false;
             }
 
-            var_dump(self::$conn->errorInfo());
+            
+        }
+
+        public static function ponIdRespuesta($Id_respuesta_correcta,$Id_pregunta)
+        {
+            $consulta="UPDATE pregunta SET Id_respuesta='${Id_respuesta_correcta}' WHERE Id='${Id_pregunta}'";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado)
+            {
+                return true;
+            }
+            
+        
+        
         }
 
 
@@ -119,6 +183,29 @@
             $registro=$resultado->fetch(PDO::FETCH_ASSOC);
             return $registro["Id"];
         }
+
+        public static function buscaIDPregunta($codigo_propio)
+        {
+            
+            $consulta="SELECT Id FROM pregunta WHERE Id_propio='${codigo_propio}';";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            
+            return $registro["Id"];
+        }
+
+
+
+        public static function buscaRespuestaCorrecta($Id_pregunta)
+        {
+            $consulta="SELECT Id FROM respuesta WHERE Id_pregunta='${Id_pregunta}' AND Correcta='1'";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Id"];
+        }
+
+
+
 
         public static function buscaTematica($tematica)
         {
@@ -141,6 +228,17 @@
         }
 
 
+        public static function devuelveTematicasEnSelect()
+        {
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->query($consulta);
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                echo "<option value=".$registro["Id"].">".$registro["Tema"]."</option>";
+            }
+        }
+
+
         public static function cuentaPaginasUsuario()
         {
             $consulta="SELECT * FROM usuarios ;";
@@ -151,6 +249,19 @@
             $numero_filas=$resultado->rowCount();
 
 
+            $total_paginas=ceil($numero_filas/$tamano);
+            return $total_paginas;
+        }
+
+
+        public static function cuentaPaginasTematicas()
+        {
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            $tamano=4;
+            $numero_filas=$resultado->rowCount();
             $total_paginas=ceil($numero_filas/$tamano);
             return $total_paginas;
         }
@@ -225,6 +336,96 @@
             return $a;
             
 
+        }
+
+        public static function DevuelveTematicas($pagina)
+        {
+            $consulta="SELECT * FROM tematica";
+
+            $tamano=4;
+
+            $comienzo=($pagina-1)*$tamano;
+
+            
+            
+            
+
+
+
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            
+
+            
+
+        
+
+            
+
+            $resultado->closeCursor();
+
+            $consulta_con_limite="SELECT * FROM tematica LIMIT $comienzo,$tamano";
+
+            
+            $resultado=self::$conn->prepare($consulta_con_limite);
+            $resultado->execute(array());
+
+            $a= new stdClass;
+            $a->tematicas=array();
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                
+
+                
+
+                $valores= new stdClass;
+                $valores->Id=$registro["Id"];
+                $valores->Tema=$registro["Tema"];
+                
+
+                
+                array_push($a->tematicas,$valores);
+                
+            
+            
+            }
+            $JSON=json_encode($a);
+            return $a;
+
+
+        }
+
+
+
+        public static function BorraUsuario($Id)
+        {
+            $consulta="DELETE FROM usuarios WHERE Id=${Id}";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado)
+            {
+                return true;
+            }
+            else 
+            {
+                
+                var_dump(self::$conn->errorInfo());
+            }
+
+        }
+
+        public static function BorraUsuarioTemporal($id)
+        {
+            $consulta="DELETE FROM alumno_sin_confirmar WHERE passw=${id}";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado==1)
+            {
+                return true;
+            }
+            else 
+            {
+                var_dump(self::$conn->errorInfo());
+            }
         }
 
         

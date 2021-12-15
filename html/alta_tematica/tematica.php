@@ -10,6 +10,13 @@
     <title>Alta de tematica</title>
 </head>
 <body>
+    <?php
+        session_start();
+        if(!isset($_SESSION["usuario"]))
+        {
+            header("Location:../../index/Index.html");
+        }
+    ?>
     <header>
         <img src="../../recursos/imagenes/Imagen_tematica.jpg" alt="Imagen de alta de tematica">
         <h1>Alta de temática</h1>
@@ -18,14 +25,14 @@
     <nav>
         <ul>
             <li class="categoria">
-                <a href="">Usuarios</a>
+                <a href="../usuarios/Registros_usuarios.php">Usuarios</a>
                 <ul class="submenu">
-                    <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.html">Alta de usuario</a></li>
+                    <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.php">Alta de usuario</a></li>
                     <li><a href="">Alta masiva de usuario</a></li>
                 </ul>
             </li>
             <li class="categoria">
-                <a href="">Temáticas</a> 
+                <a href="../tematicas/Registrso_tematicas.php">Temáticas</a> 
                 <ul class="submenu">
                     <li><a href="">Alta de temática</a></li>
                 </ul>
@@ -33,7 +40,7 @@
             <li class="categoria">
                 <a href="">Preguntas</a>
                 <ul class="submenu">
-                    <li><a href="">Alta de pregunta</a></li>
+                    <li><a href="../alta_pregunta/Alta_preguntas.php">Alta de pregunta</a></li>
                     <li><a href="">Alta masiva de preguntas</a></li>
                 </ul>
             </li>

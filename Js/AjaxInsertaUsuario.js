@@ -27,7 +27,7 @@ window.addEventListener("load",function(ev){
     if(Email.value.length>0 && Nombre.value.length>0 && Apellido1.value.length>0 && IFecha.value!='' && opcion_seleccionada.text!=undefined)
     {
         let form1 = new FormData();
-        
+    
         form1.append("IEmail",Email.value);
         form1.append("INombre",Nombre.value);
         form1.append("IAp1",Apellido1.value);

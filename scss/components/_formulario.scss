@@ -19,12 +19,13 @@ input
         border-color: darkblue;
         box-shadow: 2px 2px 10px darkblue;
     }
-    cursor: text;
+    
 
 }
 
 input[type=text]
 {
+    cursor: text;
     margin: 10px;
     @include tamano(1.5rem,15rem);
     font-size: $texto_s;
@@ -33,6 +34,7 @@ input[type=text]
 
 input[type=password]
 {
+    cursor: text;
     margin: 10px;
     @include tamano(1.5rem,15rem);
     font-size: $texto_s;
@@ -73,6 +75,7 @@ select
     margin: 10px;
     @include tamano(1.5rem,10rem);
     font-size: $texto_s;
+    cursor:pointer;
     &:hover
     {
         background-color: $color_secundario;
@@ -80,6 +83,20 @@ select
     @include bordes(3px,solid,black);
 
 }
+textarea
+{
+    margin: 10px;
+    font-size: $texto_s;
+    @include bordes(3px,solid,black);
+    cursor: text;
+    box-shadow: 2px 2px 10px black;
+    &:hover
+    {
+        border-color: darkblue;
+        box-shadow: 2px 2px 10px darkblue;
+    }
+}
+
 
 
 

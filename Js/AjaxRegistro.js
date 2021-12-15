@@ -1,39 +1,58 @@
 window.addEventListener("load",function(ev){
     ev.preventDefault();
+    
 
-    const tabla=document.getElementById("tabla_registro");
+    
     const body_tabla=document.getElementById("datos");
     const paginas=document.getElementById("paginas");
-    var numero;
-    var pagina=1;
-    var url;
+    
+    
+    
+    
    
-
-
-
-
 
     
     var crear_thead=document.createElement("thead");
     var crear_tbody=document.createElement("tbody");
     
 
-    const ajax = new XMLHttpRequest;
-    ajax.onreadystatechange=function()
+    
+        
+        
+    
+    
+    
+
+    
+    cargaPagina(1);
+
+
+
+
+   
+   
+
+
+    function cargaPagina(pagina)
     {
-        if(ajax.readyState==4 && ajax.status==200)
+        
+
+        const ajax=new XMLHttpRequest;
+
+        ajax.onreadystatechange=function()
         {
-            var respuesta=(ajax.responseText);
-            obj=JSON.parse(respuesta);
-            var cantidad=obj.datos.usuarios.length;
-            
-
-            
-            for(let i=0;i<cantidad;i++)
+            if(ajax.readyState==4 && ajax.status==200)
             {
-
+                var respuesta=ajax.responseText;
+                obj=JSON.parse(respuesta);
+                body_tabla.innerHTML="";
+                var cantidad=obj.datos.usuarios.length;
                 
-                let crearTr=document.createElement("tr");
+                var numero=obj.paginas_totales;
+                document.cookie=numero;
+                for(let i=0;i<cantidad;i++)
+                {
+                    let crearTr=document.createElement("tr");
                 
                 body_tabla.appendChild(crearTr);
 
@@ -62,6 +81,41 @@ window.addEventListener("load",function(ev){
                     let Texto6=document.createTextNode(obj.datos.usuarios[i].Rol);   
                     crearTd6.appendChild(Texto6);
 
+                    let crearTd7=document.createElement("td");
+                    let Texto7=document.createTextNode("borrar");
+                    crearTd7.style.cursor="pointer";
+                    crearTd7.onclick=function(ev){
+                        ev.preventDefault();
+                        debugger;
+                        
+                        var form2=new FormData;
+
+                        form2.append("Id",crearTd1.innerText);
+
+                        const ajax2=new XMLHttpRequest;
+
+                        ajax2.onreadystatechange=function()
+                        {
+                            if(ajax2.readyState==4 && ajax2.status==200)
+                            {
+                                
+                                var respuesta=ajax.responseText;
+                                if(respuesta==1)
+                                {
+                                    alert("Los cambios se efectuaran al recargar la pagina");
+                                    
+                                }
+                                
+
+                            }
+                            
+                        }
+                        ajax2.open("POST","../../php/Usuario/BorraUsuario.php");
+                        ajax2.send(form2);
+                        alert("Los cambios se efectuaran al recargar la pagina");
+                    }
+                    crearTd7.appendChild(Texto7);
+
 
                     crearTr.appendChild(crearTd1);
                     crearTr.appendChild(crearTd2);
@@ -69,34 +123,62 @@ window.addEventListener("load",function(ev){
                     crearTr.appendChild(crearTd4);
                     crearTr.appendChild(crearTd5);
                     crearTr.appendChild(crearTd6);
-            }
-            
-            for(let i=1;i<=obj.paginas_totales;i++)
-            {
-                let crear_span=document.createElement("span");
-                numero=i;
-
-                
-                
-                crear_span.innerHTML=numero;
-                debugger;
-                crear_span.onclick=function(ev)
-                {
-                    pagina=numero;
-                    
+                    crearTr.appendChild(crearTd7);
                 }
-                paginas.appendChild(crear_span);
+                
+                
+                
             }
+        }
+        ajax.open("GET","../../php/Usuario/Registros_usuarios.php?pagina="+pagina);
+        ajax.send();
+
+        
+        
+
+
+
+    }
+    for(let i=1;i<=document.cookie.charAt(0);i++)
+        {
+            let crear_span=document.createElement("span");
+            crear_span.innerText=i;
+            crear_span.style.border="1px solid black";
+            paginas.appendChild(crear_span);
+
+            crear_span.onclick=function(ev)
+            {
+                
+                ev.preventDefault();
+                var valor=this.innerText;
+                cargaPagina(valor);
+            }
+        }
+    
+    
+    
+    
+
+    
+
+
+    
+
+
+
+
+
+    
+            
+            
             
 
 
           
         
-        }     
-    }
+            
     
-    ajax.open("GET","../../php/Usuario/Registros_usuarios.php?pagina="+pagina);
-    ajax.send();
-
+    
+    
 
 })

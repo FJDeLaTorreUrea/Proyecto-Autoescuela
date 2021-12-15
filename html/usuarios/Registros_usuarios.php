@@ -10,6 +10,15 @@
     <title>Usuarios</title>
 </head>
 <body>
+    <?php
+    session_start();
+        if(!isset($_SESSION["usuario"]))
+        {
+            header("Location:../index/Index.html");
+        }
+    
+    
+    ?>
     <header>
         
         <img class="izquierda" src="../../recursos/imagenes/Imagen_header.png" height="200px">
@@ -59,6 +68,7 @@
                     <th>Apellidos</th>
                     <th>Fecha de nacimiento</th>
                     <th>Rol</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody id="datos">

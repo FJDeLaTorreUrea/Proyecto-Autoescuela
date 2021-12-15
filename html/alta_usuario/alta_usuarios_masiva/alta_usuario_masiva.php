@@ -10,7 +10,13 @@
     <title>Alta masiva de usuarios</title>
 </head>
 <body>
-
+    <?php
+        session_start();
+        if(!isset($_SESSION["usuario"]))
+        {
+            header("Location:../../index/Index.html");
+        }
+    ?>
     <form enctype="multipart/form-data" action="../../../php/Usuario/Masiva.php" method="POST">
         <input type="hidden" name="TAMANO_MAXIMO" value="300000"><br>
         Añada el fichero aqui:<input type="file" name="fichero"><br>

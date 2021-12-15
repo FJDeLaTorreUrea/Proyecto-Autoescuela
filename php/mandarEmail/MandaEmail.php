@@ -8,9 +8,9 @@
         // cambiar a 0 para no ver mensajes de error
         $mail->SMTPDebug  = 0;                          
         $mail->SMTPAuth   = true;
-        $mail->SMTPSecure = "tls";                 
+        $mail->SMTPSecure = "ssl";                 
         $mail->Host       = "smtp.gmail.com";    
-        $mail->Port       = 587;                 
+        $mail->Port       = 465;                 
         // introducir usuario de google
         $mail->Username   = "autoescuelalosmonos@gmail.com"; 
         // introducir clave

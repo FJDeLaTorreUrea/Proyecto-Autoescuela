@@ -2,10 +2,11 @@ table{
     width: 90%;
     table-layout: fixed;
     text-align: left;
+    
 
     @include bordes(2px,solid,black);
     margin:2rem;
-    font-size: $texto_s;
+    font-size: 15px;
     thead th {
         width: 15%;
       }

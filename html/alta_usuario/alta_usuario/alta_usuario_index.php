@@ -9,6 +9,13 @@
     <title>Crear nuevo usuario</title>
 </head>
 <body>
+    <?php
+        session_start();
+        if(!isset($_SESSION["usuario"]))
+        {
+            header("Location:../../index/Index.html");
+        }
+    ?>
     <header>
         <img class="izquierda" src="../../../recursos/imagenes/Imagen_header.png" height="200px">
         <h1 class="titulo">Autoescuela Los Monos</h1>
@@ -66,7 +73,7 @@
         <label for="html">Rol</label><br>
         <select name="SRol" id="SRol">
             <option value="1">Admin</option>
-            <option value="2" selected="selected">Usuario</option>
+            <option value="2" >Usuario</option>
         </select>
         <br>
 
