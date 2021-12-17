@@ -25,9 +25,9 @@
     <nav>
         <ul>
             <li class="categoria">
-                <a href="../../usuarios/Registros_usuarios.html"><i class="fas fa-address-card"></i>Usuarios</a>
+                <a href="../../usuarios/Registros_usuarios.php"><i class="fas fa-address-card"></i>Usuarios</a>
                 <ul class="submenu">
-                    <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.html">Alta de usuario</a></li>
+                    <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.php">Alta de usuario</a></li>
                     <li><a href="">Alta masiva de usuario</a></li>
                 </ul>
             </li>

@@ -82,8 +82,10 @@
 
 
         </table>
-
-        <span id="paginas"></span>
+        <footer>
+            <span id="paginas"></span>
+        </footer>
+        
 
     
 

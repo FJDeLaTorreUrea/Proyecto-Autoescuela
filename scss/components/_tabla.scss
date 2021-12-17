@@ -4,15 +4,20 @@ table{
     text-align: left;
     
 
+
+
     @include bordes(2px,solid,black);
     margin:2rem;
     font-size: 15px;
     thead tr{
-      background-color: whitesmoke;
+      background-color: $color_cabecera_tabla;
+    }
+    tbody{
+      background-color: $color_cuerpo_tabla;
     }
     thead th {
         width: 15%;
-        background-color: whitesmoke;
+        background-color: $color_cabecera_tabla;
       }
       
       
@@ -36,6 +41,7 @@ td{
     @include bordes (2px,solid,black)
 }
 
-span{
-  cursor: pointer;
+#paginas{
+  cursor:pointer;
 }
+

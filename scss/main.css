@@ -294,12 +294,16 @@ table {
 }
 
 table thead tr {
-  background-color: whitesmoke;
+  background-color: #c5c5c5;
+}
+
+table tbody {
+  background-color: #eeeeee;
 }
 
 table thead th {
   width: 15%;
-  background-color: whitesmoke;
+  background-color: #c5c5c5;
 }
 
 table th, table td {
@@ -315,7 +319,7 @@ td {
   border: 2px solid black;
 }
 
-span {
+#paginas {
   cursor: pointer;
 }
 

@@ -84,6 +84,7 @@ window.addEventListener("load",function(ev){
                     let crearTd7=document.createElement("td");
                     let Texto7=document.createTextNode("borrar");
                     crearTd7.style.cursor="pointer";
+                    crearTd7.style.padding="2px";
                     crearTd7.onclick=function(ev){
                         ev.preventDefault();
                         debugger;
