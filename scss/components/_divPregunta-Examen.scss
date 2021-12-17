@@ -1,0 +1,43 @@
+//Estilos para los contenedores de preguntas y respuestas
+
+#contenedor1{
+    height: 300px;
+	width: 600px;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+
+    //añade un scroll
+	overflow-y: scroll;
+
+
+    clear:both;
+    padding-top: 30px;
+    float :left;
+}
+
+#contenedor2{
+    height: 300px;
+	width: 600px;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+	overflow-y: scroll;
+    
+    text-align: right;
+    float:right;
+}
+
+.preguntas{
+    height: 50px;
+    border: 1px solid black;
+}
+
+#examenes{
+    height: auto;
+}
+
+#pregunta{
+	padding:4px;
+	background:#fff;
+}
+
+

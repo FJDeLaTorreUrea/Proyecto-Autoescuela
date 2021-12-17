@@ -4,16 +4,13 @@
         protected $Descripcion;
         protected $Duracion;
         protected $N_preguntas;
-        protected $Activo;
         protected $Array_Preguntas;
 
-        public function __construct($descripcion,$duracion,$n_preguntas,$activo,$preguntas)
+        public function __construct($descripcion,$duracion,$n_preguntas,$preguntas)
         {
-            $this->Id=$id;
             $this->Descripcion=$descripcion;
             $this->Duracion=$duracion;
             $this->N_preguntas=$n_preguntas;
-            $this->Activo=$activo;
             $this->Array_Preguntas=$preguntas;
         }
 

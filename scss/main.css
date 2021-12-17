@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -5,27 +7,9 @@
           box-sizing: inherit;
 }
 
-@font-face {
-  font-family: 'Estonia';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/estonia/v5/7Au_p_4ijSecA1yHOCr2z3wM.woff2) format("woff2");
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoC1CzjvWyNL4U.woff2) format("woff2");
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
 body {
   font-size: 1.2rem;
-  font-family: "Ubuntu",sans-serif;
+  font-family: "Ubuntu", sans-serif;
   color: black;
   text-align: center;
 }
@@ -52,6 +36,15 @@ input:hover {
 }
 
 input[type=text] {
+  cursor: text;
+  margin: 10px;
+  height: 1.5rem;
+  width: 15rem;
+  font-size: 1.2rem;
+  border: 3px solid black;
+}
+
+input[type=number] {
   cursor: text;
   margin: 10px;
   height: 1.5rem;
@@ -160,6 +153,7 @@ nav ul li:hover {
   color: #ff0202;
   background-color: #e2e2e2;
   border-bottom: 2px solid #ff0202;
+  border-top: 2px solid #ff0202;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -207,17 +201,83 @@ nav ul li:hover > ul {
   transition: 0.5s;
 }
 
+#usuario {
+  clear: both;
+}
+
+#usuario ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#usuario ul li {
+  background-color: #bdbdbd;
+  position: relative;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+#usuario ul li:hover {
+  color: #ff0202;
+  background-color: #e2e2e2;
+  border-bottom: 2px solid #ff0202;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#usuario ul li:hover a:hover {
+  color: #ff0202;
+  padding: 15px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#usuario ul a {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.7rem;
+  font-style: none;
+  letter-spacing: 1px;
+  color: black;
+  background-color: none;
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+}
+
+#usuario ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 0;
+}
+
+#usuario ul ul li {
+  float: none;
+  width: 170px;
+}
+
+#usuario ul ul a {
+  line-height: 120%;
+  padding: 10px 15px;
+}
+
 header {
   background-color: #bdbdbd;
 }
 
 header img {
+  padding: 10px;
   float: left;
-  height: 50px;
+  height: 80px;
 }
 
 header h1 {
-  font-family: "Estonia",sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-size: 2.5rem;
   text-align: right;
   padding-top: 2rem;
   padding-right: 2rem;
@@ -233,8 +293,13 @@ table {
   font-size: 15px;
 }
 
+table thead tr {
+  background-color: whitesmoke;
+}
+
 table thead th {
   width: 15%;
+  background-color: whitesmoke;
 }
 
 table th, table td {
@@ -252,5 +317,48 @@ td {
 
 span {
   cursor: pointer;
+}
+
+#contenedor1 {
+  height: 300px;
+  width: 600px;
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+  overflow-y: scroll;
+  clear: both;
+  padding-top: 30px;
+  float: left;
+}
+
+#contenedor2 {
+  height: 300px;
+  width: 600px;
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+  overflow-y: scroll;
+  text-align: right;
+  float: right;
+}
+
+.preguntas {
+  height: 50px;
+  border: 1px solid black;
+}
+
+#examenes {
+  height: auto;
+}
+
+#pregunta {
+  padding: 4px;
+  background: #fff;
+}
+
+section label {
+  display: block;
+}
+
+section input[type="radio"] {
+  display: inline-block;
 }
 /*# sourceMappingURL=main.css.map */

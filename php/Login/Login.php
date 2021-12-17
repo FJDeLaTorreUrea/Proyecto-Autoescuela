@@ -1,6 +1,8 @@
 <?php
     require_once("../cargadores/cargaBD.php");
     require_once("../cargadores/cargaSesiones.php");
+    require_once("../Sesiones/Sesiones.php");
+
 
     $usuario=$_POST["InId"];
     $password=$_POST["InPassw"];
@@ -10,11 +12,16 @@
     {
         if(Conexion::Login($usuario,$password))
         {
-            session_start();
-            $_SESSION["usuario"]=$usuario;
+            abresesion();
+            creaSesion("usuario",$usuario);
             
-            echo Conexion::Login($usuario,$password);
+            $rol=Conexion::buscaRol($usuario);
+
+            creaSesion("Rol",$rol);
+            echo "1";
+
             
+                        
         }
         else 
         {

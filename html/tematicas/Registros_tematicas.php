@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../scss/main.css">
     <link rel="icon" href="../../recursos/imagenes/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="../../Js/AjaxRegistroTematica.js"></script>
     <title>Registros Tematicas</title>
 </head>
@@ -26,29 +27,29 @@
     <nav>
         <ul>
             <li class="categoria">
-                <a href="">Usuarios</a>
+                <a href="../usuarios/Registros_usuarios.php"><i class="fas fa-address-card"></i>Usuarios</a>
                     <ul class="submenu">
-                        <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.html">Alta de usuario</a></li>
+                        <li><a href="../alta_usuario/alta_usuario/alta_usuario_index.php">Alta de usuario</a></li>
                         <li><a href="">Alta masiva de usuario</a></li>
                     </ul>
             </li>
             <li class="categoria">
-                <a href="">Temáticas</a> 
+                <a href=""><i class="fab fa-black-tie"></i>Temáticas</a> 
                 <ul class="submenu">
-                    <li><a href="">Alta de temática</a></li>
+                    <li><a href="../alta_tematica/tematica.php">Alta de temática</a></li>
                 </ul>
             </li>
             <li class="categoria">
-                <a href="">Preguntas</a>
+                <a href=""><i class="fas fa-book"></i>Preguntas</a>
                 <ul class="submenu">
-                    <li><a href="">Alta de pregunta</a></li>
+                    <li><a href="../alta_pregunta/Alta_preguntas.php">Alta de pregunta</a></li>
                     <li><a href="">Alta masiva de usuario</a></li>
                 </ul>
             </li>
             <li class="categoria">
-                <a href="">Exámenes</a>
+                <a href=""><i class="fas fa-archive"></i>Exámenes</a>
                 <ul class="submenu">
-                    <li><a href="">Alta de Exámen</a></li>
+                    <li><a href="../alta_examenes/alta_examenes.php">Alta de Exámen</a></li>
                     <li><a href="">Historial de exámenes</a></li>
                 </ul>
             </li>
@@ -62,6 +63,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Tema</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody id="datos">

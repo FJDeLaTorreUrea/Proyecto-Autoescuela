@@ -2,8 +2,12 @@
 
 
     function abreSesion()
-    {
-        session_start();
+    {   
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+        
     }
 
     function creaSesion($nombre,$valor)

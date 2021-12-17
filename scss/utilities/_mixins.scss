@@ -1,9 +1,12 @@
+
+//Modifica el tamaño (largo y ancho) del objeto
 @mixin tamano($largo,$ancho)
 {
     height: $largo;
     width:$ancho;
 }
 
+//Mixin para poner estilos a un texto
 @mixin texto($fuente,$fuente_alternativa,$tamano,$estilo,$espaciado,$color,$color_fondo:none)
 {
     font-family: $fuente,$fuente_alternativa;
@@ -14,6 +17,7 @@
     background-color:$color_fondo;
 }
 
+//Mixin para generar bordes a alguna caja o linea
 @mixin bordes($tamano,$estilo,$color)
 {
     border:$tamano $estilo $color;

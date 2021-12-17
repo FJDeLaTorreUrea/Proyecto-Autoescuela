@@ -1,11 +1,22 @@
+//Estilos para los formularios de la pagina
+
+
 form
 {
     margin:30px;
     display: block;
     clear: both;
    
+    
 }
 
+//TO-DO anidar
+
+
+
+
+
+//Texto de enunciado
 label
 {
     margin:10px;
@@ -24,6 +35,15 @@ input
 }
 
 input[type=text]
+{
+    cursor: text;
+    margin: 10px;
+    @include tamano(1.5rem,15rem);
+    font-size: $texto_s;
+    @include bordes(3px,solid,black);
+}
+
+input[type=number]
 {
     cursor: text;
     margin: 10px;

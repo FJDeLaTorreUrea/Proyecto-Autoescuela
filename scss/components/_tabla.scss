@@ -7,8 +7,12 @@ table{
     @include bordes(2px,solid,black);
     margin:2rem;
     font-size: 15px;
+    thead tr{
+      background-color: whitesmoke;
+    }
     thead th {
         width: 15%;
+        background-color: whitesmoke;
       }
       
       

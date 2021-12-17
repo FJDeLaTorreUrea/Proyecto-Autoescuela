@@ -1,16 +1,23 @@
+//Estilos para encabezado de la pagina
+
 header
 {
    
     background-color: $color_menu;
+
+    //Esto corresponde al logo de la pagina que se encuentra en el header
     img
     {
+        padding: 10px;
         float: left;
-        height: 50px;
+        height: 80px;
     }
 
+    //El titulo
     h1
     {
-        font-family: "Estonia",sans-serif;
+        font-family: $fuente_texto_titulo;
+        font-size: $texto_l;
         text-align: right;
         padding-top: 2rem;
         padding-right: 2rem;
