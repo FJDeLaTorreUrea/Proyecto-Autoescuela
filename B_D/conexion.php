@@ -128,6 +128,24 @@
 
 
 
+        public static function InsertaExamenUsuario($id_usuario,$id_examen,$aciertos,$total)
+        {
+            $aprobado=0;
+            if(($total-$aciertos)<=3)
+            {
+                $aprobado=1;
+            }
+
+            $aciertos_total=$aciertos."/".$total;
+            $consulta="INSERT INTO examenes_hechos(Id,Id_examen,Id_alumno,Fecha,Aprobado,Aciertos) VALUES (default,'${id_examen}','${id_usuario}',NOW(),'${aprobado}','${aciertos_total}');";
+            $resultado=self::$conn->exec($consulta);
+            var_dump(self::$conn->errorInfo());
+            
+
+        }
+
+
+
 
 
 
@@ -156,6 +174,17 @@
                 
             // }
         }
+
+        public static function buscaIdUsuarioConEmail($Email)
+        {
+            $consulta="SELECT Id FROM usuarios WHERE Email='${Email}';";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Id"];
+        }
+
+
+
 
         public static function buscaRol($Email)
         {
@@ -354,6 +383,15 @@
             
                 return $registro["NPreguntas"];
             
+        }
+
+        public static function devuelveDuracionExamen($id)
+        {
+            $consulta="SELECT Duracion FROM examen WHERE Id='${id}';";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            
+                return $registro["Duracion"];
         }
 
 
