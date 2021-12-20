@@ -15,13 +15,14 @@
         session_start();
         if(!isset($_SESSION["usuario"]))
         {
-            header("Location:../../index/Index.html");
+            header("Location:../../index/Index.php");
         }
     ?>
     <header>
-        <img src="../../recursos/imagenes/Imagen_header.png" alt="Imagen de alta de tematica">
-        <h1>Alta de temática</h1>
-
+        <img class="izquierda" src="../../recursos/imagenes/Imagen_header.png" height="200px">
+        <h1 class="titulo">Autoescuela Los Monos</h1><br>
+        <a href="../index/Index.php">Cerrar Sesión</a>
+        <br>
     </header>
     <nav>
         <ul>

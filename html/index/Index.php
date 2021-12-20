@@ -10,6 +10,14 @@
     <title>Autoescuela los monos</title>
 </head>
 <body>
+    <?php
+        session_start();
+        if(isset($_SESSION["usuario"]))
+        {
+            session_destroy();
+        }
+    
+    ?>
     <img src="../../recursos/imagenes/Imagen_login.png" alt="Imagen de presentacion">
 
     <form action="" method="post" id="formLogin">

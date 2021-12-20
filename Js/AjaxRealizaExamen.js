@@ -15,10 +15,52 @@ window.addEventListener("load",function(ev)
             
             obj1=JSON.parse(respuesta);
             
-            
-            
             var numero=obj1.n_preguntas;
             document.cookie=numero;
+
+            var cuenta_atras=document.createElement("p");
+            cuenta_atras.setAttribute("id","cuenta_atras")
+            cuenta_atras.style.float="right";
+            cuenta_atras.style.fontSize="1.5rem";
+
+            var dia_actual=new Date;
+                
+            var tiempo=obj1.duracion.substr(3,2)-0;
+
+                
+
+            var tiempolimite=dia_actual.getTime();
+
+            var fecha_incrementada=new Date(tiempolimite+tiempo*60000);
+            
+            var x = setInterval(function(){
+                var ahora=new Date().getTime();
+
+                var tiempo_restante=fecha_incrementada - ahora;
+
+                var minutos = Math.floor((tiempo_restante % (1000 * 60 * 60)) / (1000 * 60));
+                var segundos = Math.floor((tiempo_restante % (1000 * 60)) / 1000);
+
+
+                document.getElementById("cuenta_atras").innerHTML= minutos +":"+ segundos;
+
+                if(tiempo_restante<0)
+                {
+                    window.history.go(-1);
+                }
+            },1000);
+            
+            Pregunta.appendChild(cuenta_atras);
+
+
+
+
+
+
+
+
+            
+            
             
             for(let i=0;i<numero;i++)
             {
@@ -31,11 +73,7 @@ window.addEventListener("load",function(ev)
                 imagen.setAttribute("src","../../recursos/imagenes_preguntas/"+obj1.datos_unicos.pregunta[i].Recurso);
                 imagen.style.float="left";
 
-                let tiempo=document.createElement("p");
-                let minutos=document.createElement("span");
-                let segundos=document.createElement("span");
-                var Tiempo_limite="";
-
+                
 
                 let Enunciado=document.createElement("p");
                 Enunciado.innerText=obj1.datos_unicos.pregunta[i].Enunciado;
@@ -220,11 +258,11 @@ window.addEventListener("load",function(ev)
             }
             
             
-            pregunta.children[0].children[10].style.display="none";
+            pregunta.children[1].children[10].style.display="none";
             var preguntas=(pregunta.children.length)-1;
             pregunta.children[preguntas].children[11].style.display="none";
             
-            for(let i=0;i<preguntas;i++)
+            for(let i=1;i<preguntas;i++)
             {
                 pregunta.children[i].children[12].style.display="none";
             }         
@@ -234,6 +272,7 @@ window.addEventListener("load",function(ev)
                 crearspan.innerText=i;
                 crearspan.style.border="1px solid black";
                 crearspan.style.cursor="pointer";
+                crearspan.style.padding="2px"
                 debugger;
                 crearspan.onclick=function()
                 {

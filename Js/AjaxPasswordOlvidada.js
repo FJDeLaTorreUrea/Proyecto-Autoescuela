@@ -40,6 +40,7 @@ window.addEventListener("load",function(ev){
             ajax.open("POST","../../php/mandarEmail/RecuperarPassword.php");
             ajax.send(form1);
         }
+        
         else
         {
             corrector.setAttribute("Id","error");

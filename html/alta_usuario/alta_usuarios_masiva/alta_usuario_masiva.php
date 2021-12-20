@@ -14,7 +14,7 @@
         session_start();
         if(!isset($_SESSION["usuario"]))
         {
-            header("Location:../../index/Index.html");
+            header("Location:../../index/Index.php");
         }
     ?>
     <form enctype="multipart/form-data" action="../../../php/Usuario/Masiva.php" method="POST">

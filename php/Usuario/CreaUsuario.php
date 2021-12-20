@@ -51,7 +51,7 @@
             $clave_temporal=$Usuario->getPassword();
             $Usuario_temporal=new Usuario_temporal($clave,$clave_temporal,5);
             Conexion::InsertarUsuario_Temporal($Usuario_temporal);
-            MandaEmail($Usuario->getEmail(),"<a href='localhost/Proyecto-Autoescuela/html/confirmar_usuario/confirmar_usuario.html?id=${clave_temporal}'>Haga click en este enlace para autentificar su cuenta </a>","Confirmar ingreso de usuario");
+            MandaEmail($Usuario->getEmail(),"<a href='localhost/Proyecto-Autoescuela/html/confirmar_usuario/confirmar_usuario.php?id=${clave_temporal}'>Haga click en este enlace para autentificar su cuenta </a>","Confirmar ingreso de usuario");
             //"<a href='localhost/Proyecto-Autoescuela/html/password_olvidada/cambia_password/cambiar_password.html?id=${correo}'>Haga click para cambiar su contrase&ntilde;a</a>"
             echo "1";
             

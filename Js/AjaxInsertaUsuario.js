@@ -71,6 +71,14 @@ window.addEventListener("load",function(ev){
         ajax.send(form1);
         
     }
+    else
+    {
+        comprobar.setAttribute("id","error");
+        comprobar.innerText="Introduzca todos los campos";
+    }
+    comprobar.setAttribute("id","error");
+    comprobar.innerText="Espere por favor";
+    }
 
 
     
@@ -79,7 +87,7 @@ window.addEventListener("load",function(ev){
         
 
 
-    };
+    
 
     
 

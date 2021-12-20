@@ -112,6 +112,8 @@ window.addEventListener("load",function(ev){
             ajax.send(form1);
 
         }
+        notificador.setAttribute("id","error");
+        notificador.innerText="Introduzca todos los campos";
 
         enunciado.value="";
         Op1.value="";

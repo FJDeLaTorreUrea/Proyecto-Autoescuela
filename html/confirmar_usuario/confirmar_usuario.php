@@ -11,6 +11,7 @@
     <title>Confirmar usuario</title>
 </head>
 <body>
+    
     <h1>Cambiar Contraseña</h1>
     <form action="" method="" name="FormPassw" id="FormPassw">
         <span id="comprobador"></span>

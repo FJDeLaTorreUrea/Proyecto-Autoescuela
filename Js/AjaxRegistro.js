@@ -12,8 +12,7 @@ window.addEventListener("load",function(ev){
    
 
     
-    var crear_thead=document.createElement("thead");
-    var crear_tbody=document.createElement("tbody");
+    
     
 
     

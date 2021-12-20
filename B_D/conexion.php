@@ -39,11 +39,25 @@
             $id_usuario=$usuario_temporal->getId_usuario();
             $Fecha_exp=$usuario_temporal->getFecha_expiracion();
 
-            $consulta="INSERT INTO alumno_sin_confirmar(Id_usuario,password,Fecha_expiracion) VALUES ('${id_usuario}','${password_temporal}','${Fecha_exp}');";
+            $consulta="INSERT INTO alumno_sin_confirmar(Id_usuario,passw,Fecha_expiracion) VALUES ('${id_usuario}','${password_temporal}','${Fecha_exp}');";
             $resultado=self::$conn->exec($consulta);
-            return self::$conn->errorInfo();
+            
            
 
+        }
+
+        public static function BorraUsuarioLimite($id)
+        {
+            
+            $consulta="DELETE FROM usuarios WHERE Passw='${id}';";
+            $resultado1=self::$conn->exec($consulta);
+            $resultado=self::$conn->exec($consulta);
+        }
+
+        public static function BorraUsuarioSinConfirmarLimite($id)
+        {
+            $consulta="DELETE FROM alumno_sin_confirmar WHERE passw='${id}';";
+            $resultado1=self::$conn->exec($consulta);
         }
 
         public static function InsertarTematica($tematica)
@@ -133,7 +147,7 @@
             $aprobado=0;
             if(($total-$aciertos)<=3)
             {
-                $aprobado=1;
+                $aprobado=true;
             }
 
             $aciertos_total=$aciertos."/".$total;
@@ -174,6 +188,15 @@
                 
             // }
         }
+        public static function BuscaFechaLimite($id)
+        {
+            $consulta="SELECT Fecha_expiracion FROM alumno_sin_confirmar WHERE passw='${id}'";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Fecha_expiracion"];
+        }
+
+
 
         public static function buscaIdUsuarioConEmail($Email)
         {
@@ -487,6 +510,89 @@
             return $total_paginas;
         }
 
+        public static function cuentaPaginasExamenesUsuario($id)
+        {
+            $consulta="SELECT * FROM examenes_hechos WHERE Id_alumno='${id}';";
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            $tamano=4;
+            $numero_filas=$resultado->rowCount();
+
+
+            $total_paginas=ceil($numero_filas/$tamano);
+            
+            return $total_paginas;
+        }
+
+        public static function devuelveExamenesHechosUsuario($pagina,$id)
+        {
+            $consulta="SELECT * FROM examenes_hechos WHERE Id_alumno='${id}'";
+            $resultado=self::$conn->query($consulta);
+
+            $tamano=4;
+
+            $comienzo=($pagina-1)*$tamano;
+
+            
+            
+            
+
+
+
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            
+
+            
+
+        
+
+            
+
+            $resultado->closeCursor();
+
+            $consulta_con_limite="SELECT * FROM examenes_hechos WHERE Id_alumno='${id}' LIMIT $comienzo,$tamano";
+
+            
+            $resultado=self::$conn->prepare($consulta_con_limite);
+            $resultado->execute(array());
+
+           
+           
+            $a= new stdClass;
+            $a->examenes=array();
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+
+                
+
+                $valores= new stdClass;
+                $valores->Id=$registro["Id_examen"];
+                $valores->Fecha= date("d-m-Y",strtotime($registro["Fecha"]));
+                if($registro["Aprobado"]==1)
+                {
+                    $valores->Aprobado="Aprobado";
+                }
+                else {
+                    $valores->Aprobado="Suspenso";
+                }
+                $valores->Aciertos=$registro["Aciertos"];
+                
+
+                
+                array_push($a->examenes,$valores);
+                
+            
+            
+            }
+            
+            $JSON=json_encode($a);
+            return $a;
+            
+
+        }
 
 
         public static function devuelveExamenes($pagina)

@@ -17,13 +17,14 @@
         
         if(!isset($_SESSION["usuario"]))
         {
-            header("Location:../index/Index.html");
+            header("Location:../index/Index.php");
         }
     ?>
 
     <header>
         <img class="izquierda" src="../../recursos/imagenes/Imagen_header.png" height="200px">
-        <h1 class="titulo">Autoescuela Los Monos</h1>
+        <h1 class="titulo">Autoescuela Los Monos</h1><br>
+        <a href="../index/Index.php">Cerrar Sesión</a>
         <br>
     </header>
         <nav id="Admin">
@@ -61,7 +62,7 @@
         </nav>
         <nav id="usuario">
             <ul>
-                <li><a href="">Historial de examenes</a></li>
+                <li><a href="../historial_examenes/usuarios/historial_alumno.php">Historial de examenes</a></li>
                 <li><a href="../Examenes_predefinidos/Examenes_predefinidos.php">Examen predefinido</a></li>
                 <li><a href="">Examen aleatorio</a></li>
             </ul>
