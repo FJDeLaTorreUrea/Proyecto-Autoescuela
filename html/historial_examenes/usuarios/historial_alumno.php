@@ -37,10 +37,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Descripcion</th>
                 <th>Fecha</th>
-                <th>Aciertos</th>
                 <th>Aprobado</th>
+                <th>Aciertos</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody id="datos">

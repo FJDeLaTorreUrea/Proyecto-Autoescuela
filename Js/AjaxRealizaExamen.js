@@ -72,42 +72,61 @@ window.addEventListener("load",function(ev)
                 let imagen=document.createElement("img");
                 imagen.setAttribute("src","../../recursos/imagenes_preguntas/"+obj1.datos_unicos.pregunta[i].Recurso);
                 imagen.style.float="left";
+                pregunta.appendChild(imagen);
+                
 
                 
 
                 let Enunciado=document.createElement("p");
                 Enunciado.innerText=obj1.datos_unicos.pregunta[i].Enunciado;
-
+                pregunta.appendChild(Enunciado);
                 
-                    let Op1=document.createElement("label");
-                    Op1.innerText=obj1.respuestas[i].respuestas[0].Enunciado;
-                    let Op1_radio=document.createElement("input");
+
+
                     
-                    Op1_radio.setAttribute("type","radio");
-                    Op1_radio.setAttribute("name","opcion"+i);
-                    Op1_radio.setAttribute("checked","true");
+                    for(let j=0;j<4;j++)
+                    {
+                        let parrafo=document.createElement("p");
+                        let Op1=document.createElement("label");
+                        Op1.innerText=obj1.respuestas[i].respuestas[j].Enunciado;
+                        let Op1_radio=document.createElement("input");
+                    
+                        Op1_radio.setAttribute("type","radio");
+                        Op1_radio.setAttribute("name","opcion"+i);
+                        Op1_radio.setAttribute("checked","true");
+                        parrafo.appendChild(Op1_radio);
+                        parrafo.appendChild(Op1);
+                        pregunta.appendChild(parrafo);
+
+                    }
+                    // Op1.innerText=obj1.respuestas[i].respuestas[0].Enunciado;
+                    // let Op1_radio=document.createElement("input");
+                    
+                    // Op1_radio.setAttribute("type","radio");
+                    // Op1_radio.setAttribute("name","opcion"+i);
+                    // Op1_radio.setAttribute("checked","true");
                     
 
-                    let Op2=document.createElement("label");
-                    Op2.innerText=obj1.respuestas[i].respuestas[1].Enunciado;
-                    let Op2_radio=document.createElement("input");
-                    Op2_radio.setAttribute("type","radio");
-                    Op2_radio.setAttribute("name","opcion"+i);
+                    // let Op2=document.createElement("label");
+                    // Op2.innerText=obj1.respuestas[i].respuestas[1].Enunciado;
+                    // let Op2_radio=document.createElement("input");
+                    // Op2_radio.setAttribute("type","radio");
+                    // Op2_radio.setAttribute("name","opcion"+i);
                     
 
-                    let Op3=document.createElement("label");
-                    Op3.innerText=obj1.respuestas[i].respuestas[2].Enunciado;
-                    let Op3_radio=document.createElement("input");
-                    Op3_radio.setAttribute("type","radio");
-                    Op3_radio.setAttribute("name","opcion"+i);
+                    // let Op3=document.createElement("label");
+                    // Op3.innerText=obj1.respuestas[i].respuestas[2].Enunciado;
+                    // let Op3_radio=document.createElement("input");
+                    // Op3_radio.setAttribute("type","radio");
+                    // Op3_radio.setAttribute("name","opcion"+i);
                    
 
 
-                    let Op4=document.createElement("label");
-                    Op4.innerHTML=obj1.respuestas[i].respuestas[3].Enunciado;
-                    let Op4_radio=document.createElement("input");
-                    Op4_radio.setAttribute("type","radio");
-                    Op4_radio.setAttribute("name","opcion"+i);
+                    // let Op4=document.createElement("label");
+                    // Op4.innerHTML=obj1.respuestas[i].respuestas[3].Enunciado;
+                    // let Op4_radio=document.createElement("input");
+                    // Op4_radio.setAttribute("type","radio");
+                    // Op4_radio.setAttribute("name","opcion"+i);
                    
                     
 
@@ -230,20 +249,20 @@ window.addEventListener("load",function(ev)
 
 
 
-
+                
                 Examen.appendChild(Pregunta);
                 Pregunta.appendChild(pregunta);
-                pregunta.appendChild(imagen);
-                pregunta.appendChild(Enunciado);
+                // pregunta.appendChild(imagen);
+                // pregunta.appendChild(Enunciado);
 
-                pregunta.appendChild(Op1);
-                pregunta.appendChild(Op1_radio);
-                pregunta.appendChild(Op2);
-                pregunta.appendChild(Op2_radio);
-                pregunta.appendChild(Op3);
-                pregunta.appendChild(Op3_radio);
-                pregunta.appendChild(Op4);
-                pregunta.appendChild(Op4_radio);
+                // pregunta.appendChild(Op1);
+                // pregunta.appendChild(Op1_radio);
+                // pregunta.appendChild(Op2);
+                // pregunta.appendChild(Op2_radio);
+                // pregunta.appendChild(Op3);
+                // pregunta.appendChild(Op3_radio);
+                // pregunta.appendChild(Op4);
+                // pregunta.appendChild(Op4_radio);
                 
                 pregunta.appendChild(Anterior);
                 pregunta.appendChild(Siguiente);
@@ -258,13 +277,13 @@ window.addEventListener("load",function(ev)
             }
             
             
-            pregunta.children[1].children[10].style.display="none";
+            pregunta.children[1].children[6].style.display="none";
             var preguntas=(pregunta.children.length)-1;
-            pregunta.children[preguntas].children[11].style.display="none";
+            pregunta.children[preguntas].children[7].style.display="none";
             
             for(let i=1;i<preguntas;i++)
             {
-                pregunta.children[i].children[12].style.display="none";
+                pregunta.children[i].children[8].style.display="none";
             }         
             for(let i=1;i<=obj1.n_preguntas;i++)
             {

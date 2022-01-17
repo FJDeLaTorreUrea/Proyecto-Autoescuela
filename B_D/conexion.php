@@ -14,7 +14,10 @@
             }
         }
 
-        //Metodos para INSERTAR
+        
+        //METODOS PARA USUARIOS
+
+        //Inserta un Usuario
         public static function InsertarUsuario($usuario)
         {
             $email=$usuario->getEmail();
@@ -33,6 +36,7 @@
             return self::$conn->errorInfo();
         }
 
+        //Inserta un usuario temporal
         public static function InsertarUsuario_Temporal($usuario_temporal)
         {
             $password_temporal=$usuario_temporal->getPassword_temporal();
@@ -46,6 +50,7 @@
 
         }
 
+        //Borran el usuario si llega a la fecha limite indicada 
         public static function BorraUsuarioLimite($id)
         {
             
@@ -54,12 +59,248 @@
             $resultado=self::$conn->exec($consulta);
         }
 
+        
         public static function BorraUsuarioSinConfirmarLimite($id)
         {
             $consulta="DELETE FROM alumno_sin_confirmar WHERE passw='${id}';";
             $resultado1=self::$conn->exec($consulta);
         }
 
+        //-------------------------------------------
+
+        //Confirma el email y la contraseña introducida
+        public static function Login($Email,$contrasena)
+        {
+            $consulta="SELECT * FROM usuarios WHERE Email='${Email}' AND Passw='${contrasena}';";
+            $resultado=self::$conn->query($consulta);
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                if($registro["Email"]==$Email && $registro["Passw"]==$contrasena)
+                {
+                    return $registro["Rol"];
+                }
+                
+            }
+            
+            
+            // while($registro = $resultado->fetch(PDO::FETCH_OBJ)){
+                
+            // }
+        }
+
+        //Busca la fecha limite del usuario para confirmar
+        public static function BuscaFechaLimite($id)
+        {
+            $consulta="SELECT Fecha_expiracion FROM alumno_sin_confirmar WHERE passw='${id}'";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Fecha_expiracion"];
+        }
+
+
+        //Busca Id del usuario con su Email
+        public static function buscaIdUsuarioConEmail($Email)
+        {
+            $consulta="SELECT Id FROM usuarios WHERE Email='${Email}';";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Id"];
+        }
+
+
+
+        //Busca el Rol del usuario con su Email
+        public static function buscaRol($Email)
+        {
+            $consulta="SELECT * FROM usuarios WHERE Email='${Email}';";
+            $resultado=self::$conn->query($consulta);
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                if($registro["Email"]==$Email )
+                {
+                    return $registro["Rol"];
+                }
+                else 
+                {
+                    //var_dump(self::$conn->errorInfo());    
+                }
+                
+            }
+            
+            
+            
+        }
+
+
+        //Valida que el Email esté introducido ya
+        public static function buscaEmail($Email)
+        {
+            $consulta="SELECT * FROM usuarios WHERE Email='${Email}';";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+
+            if($registro["Email"]==$Email)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Metodo para cambiar la contraseña
+        public static function cambiaPassword($id,$nuevaPassw)
+        {
+            $consulta="UPDATE usuarios SET Passw='${nuevaPassw}' WHERE Passw='${id}'";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            
+        }
+
+        //Busca el id de un usuario con su contraseña temporal, introduciendo un objeto Usuario
+        public static function buscaID($usuario)
+        {
+            $password=$usuario->getPassword();
+            $consulta="SELECT Id FROM usuarios WHERE Passw='${password}'";
+            $resultado=self::$conn->query($consulta);
+            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
+            return $registro["Id"];
+        }
+
+        //Cuenta las paginas del registro de Usuarios
+        public static function cuentaPaginasUsuario()
+        {
+            $consulta="SELECT * FROM usuarios ;";
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            $tamano=4;
+            $numero_filas=$resultado->rowCount();
+
+
+            $total_paginas=ceil($numero_filas/$tamano);
+            return $total_paginas;
+        }
+
+
+
+        //DEvuelve los usuarios del registro
+        public static function DevuelveUsuarios($pagina)
+        {
+            
+            $consulta="SELECT * FROM usuarios ;";
+
+            $tamano=4;
+            
+            
+            
+            $comienzo=($pagina-1)*$tamano;
+
+            
+            
+            
+
+
+
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            
+
+            
+
+        
+
+            
+
+            $resultado->closeCursor();
+
+            $consulta_con_limite="SELECT * FROM usuarios LIMIT $comienzo,$tamano";
+
+            
+            $resultado=self::$conn->prepare($consulta_con_limite);
+            $resultado->execute(array());
+
+           
+           
+            $a= new stdClass;
+            $a->usuarios=array();
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+
+                
+
+                $valores= new stdClass;
+                $valores->Id=$registro["Id"];
+                $valores->Email=$registro["Email"];
+                $valores->Nombre=$registro["Nombre"];
+                $valores->Ap1=$registro["Ap1"];
+                $valores->Ap2=$registro["Ap2"];
+                $valores->Fecha_nac=$registro["FechaNac"];
+                $valores->Rol=$registro["Rol"];
+
+                
+                array_push($a->usuarios,$valores);
+                
+            
+            
+            }
+            
+            $JSON=json_encode($a);
+            return $a;
+            
+
+        }
+
+        //Borra un usuario con su Id
+        public static function BorraUsuario($Id)
+        {
+            $consulta="DELETE FROM usuarios WHERE Id=${Id}";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado)
+            {
+                return true;
+            }
+            else 
+            {
+                
+                var_dump(self::$conn->errorInfo());
+            }
+
+        }
+
+        //Borra un usuario temporal con su Id
+        public static function BorraUsuarioTemporal($id)
+        {
+            $consulta="DELETE FROM alumno_sin_confirmar WHERE passw=${id}";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado==1)
+            {
+                return true;
+            }
+            else 
+            {
+                var_dump(self::$conn->errorInfo());
+            }
+        }
+
+
+
+
+        //------------------------
+        //Metodos Tematicas
+
+
+        //Inserta una tematica
         public static function InsertarTematica($tematica)
         {
             $Nombre_tematica=$tematica->getTematica();
@@ -68,6 +309,168 @@
             $resultado=self::$conn->exec($consulta);
             return self::$conn->errorInfo();
         }
+
+
+        public static function buscaTematica($tematica)
+        {
+            $nombre_tematica=$tematica->getTematica();
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->query($consulta);
+            
+           
+            while($registro = $resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                if($registro["Tema"]==$nombre_tematica)
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        public static function devuelveTematicasEnSelect()
+        {
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->query($consulta);
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                echo "<option value=".$registro["Id"].">".$registro["Tema"]."</option>";
+            }
+        }
+
+        public static function devuelvePreguntasEnDiv()
+        {
+            $consulta="SELECT * FROM pregunta";
+            $resultado=self::$conn->query($consulta);
+            $contador=0;
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                echo "<div id='preguntas".$contador."' class='preguntas' id_pregunta='".$registro["Id"]."' draggable='true'><img src'../recursos/imagenes_preguntas/".$registro["Recurso"]."'>".$registro["Enunciado"]."</div>";
+                $contador++;
+            }
+        }
+
+
+        public static function cuentaPaginasTematicas()
+        {
+            $consulta="SELECT * FROM tematica;";
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            $tamano=4;
+            $numero_filas=$resultado->rowCount();
+            $total_paginas=ceil($numero_filas/$tamano);
+            return $total_paginas;
+        }
+
+
+
+
+
+
+        
+
+        public static function DevuelveTematicas($pagina)
+        {
+            $consulta="SELECT * FROM tematica";
+
+            $tamano=4;
+
+            $comienzo=($pagina-1)*$tamano;
+
+            
+            
+            
+
+
+
+            $resultado=self::$conn->prepare($consulta);
+            $resultado->execute(array());
+
+            
+
+            
+
+        
+
+            
+
+            $resultado->closeCursor();
+
+            $consulta_con_limite="SELECT * FROM tematica LIMIT $comienzo,$tamano";
+
+            
+            $resultado=self::$conn->prepare($consulta_con_limite);
+            $resultado->execute(array());
+
+            $a= new stdClass;
+            $a->tematicas=array();
+            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
+            {
+                
+
+                
+
+                $valores= new stdClass;
+                $valores->Id=$registro["Id"];
+                $valores->Tema=$registro["Tema"];
+                
+
+                
+                array_push($a->tematicas,$valores);
+                
+            
+            
+            }
+            $JSON=json_encode($a);
+            return $a;
+
+
+        }
+
+
+
+        
+
+        public static function BorraTematica($id)
+        {
+            $consulta="DELETE FROM tematica WHERE Id='${id}';";
+            $resultado=self::$conn->exec($consulta);
+            if($resultado==1)
+            {
+                return true;
+            }
+            else {
+                var_dump(self::$conn->errorInfo());
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //METODOS PREGUNTAS Y EXAMENES
 
         public static function InsertarPregunta($pregunta)
         {
@@ -170,99 +573,11 @@
 
 
     
-        public static function Login($Email,$contrasena)
-        {
-            $consulta="SELECT * FROM usuarios WHERE Email='${Email}' AND Passw='${contrasena}';";
-            $resultado=self::$conn->query($consulta);
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                if($registro["Email"]==$Email && $registro["Passw"]==$contrasena)
-                {
-                    return $registro["Rol"];
-                }
-                
-            }
-            
-            
-            // while($registro = $resultado->fetch(PDO::FETCH_OBJ)){
-                
-            // }
-        }
-        public static function BuscaFechaLimite($id)
-        {
-            $consulta="SELECT Fecha_expiracion FROM alumno_sin_confirmar WHERE passw='${id}'";
-            $resultado=self::$conn->query($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-            return $registro["Fecha_expiracion"];
-        }
+        
 
 
 
-        public static function buscaIdUsuarioConEmail($Email)
-        {
-            $consulta="SELECT Id FROM usuarios WHERE Email='${Email}';";
-            $resultado=self::$conn->query($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-            return $registro["Id"];
-        }
-
-
-
-
-        public static function buscaRol($Email)
-        {
-            $consulta="SELECT * FROM usuarios WHERE Email='${Email}';";
-            $resultado=self::$conn->query($consulta);
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                if($registro["Email"]==$Email )
-                {
-                    return $registro["Rol"];
-                }
-                else 
-                {
-                    //var_dump(self::$conn->errorInfo());    
-                }
-                
-            }
-            
-            
-            
-        }
-
-
-
-        public static function buscaEmail($Email)
-        {
-            $consulta="SELECT * FROM usuarios WHERE Email='${Email}';";
-            $resultado=self::$conn->query($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-
-            if($registro["Email"]==$Email)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static function cambiaPassword($id,$nuevaPassw)
-        {
-            $consulta="UPDATE usuarios SET Passw='${nuevaPassw}' WHERE Passw='${id}'";
-            $resultado=self::$conn->exec($consulta);
-            if($resultado)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            
-        }
+        
 
         public static function ponIdRespuesta($Id_respuesta_correcta,$Id_pregunta)
         {
@@ -278,15 +593,7 @@
         }
 
 
-        public static function buscaID($usuario)
-        {
-            $password=$usuario->getPassword();
-            $consulta="SELECT Id FROM usuarios WHERE Passw='${password}'";
-            $resultado=self::$conn->query($consulta);
-            $registro=$resultado->fetch(PDO::FETCH_ASSOC);
-            return $registro["Id"];
-        }
-
+        
         public static function buscaIDPregunta($codigo_propio)
         {
             
@@ -451,48 +758,7 @@
 
 
 
-        public static function buscaTematica($tematica)
-        {
-            $nombre_tematica=$tematica->getTematica();
-            $consulta="SELECT * FROM tematica;";
-            $resultado=self::$conn->query($consulta);
-            
-           
-            while($registro = $resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                if($registro["Tema"]==$nombre_tematica)
-                {
-                    return true;
-                }
-                else 
-                {
-                    return false;
-                }
-            }
-        }
-
-
-        public static function devuelveTematicasEnSelect()
-        {
-            $consulta="SELECT * FROM tematica;";
-            $resultado=self::$conn->query($consulta);
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                echo "<option value=".$registro["Id"].">".$registro["Tema"]."</option>";
-            }
-        }
-
-        public static function devuelvePreguntasEnDiv()
-        {
-            $consulta="SELECT * FROM pregunta";
-            $resultado=self::$conn->query($consulta);
-            $contador=0;
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                echo "<div id='preguntas".$contador."' class='preguntas' id_pregunta='".$registro["Id"]."' draggable='true'><img src'../recursos/imagenes_preguntas/".$registro["Recurso"]."'>".$registro["Enunciado"]."</div>";
-                $contador++;
-            }
-        }
+        
 
 
         public static function cuentaPaginasExamenes()
@@ -662,207 +928,10 @@
 
 
 
-        public static function cuentaPaginasUsuario()
-        {
-            $consulta="SELECT * FROM usuarios ;";
-            $resultado=self::$conn->prepare($consulta);
-            $resultado->execute(array());
-
-            $tamano=4;
-            $numero_filas=$resultado->rowCount();
-
-
-            $total_paginas=ceil($numero_filas/$tamano);
-            return $total_paginas;
-        }
-
-
-        public static function cuentaPaginasTematicas()
-        {
-            $consulta="SELECT * FROM tematica;";
-            $resultado=self::$conn->prepare($consulta);
-            $resultado->execute(array());
-
-            $tamano=4;
-            $numero_filas=$resultado->rowCount();
-            $total_paginas=ceil($numero_filas/$tamano);
-            return $total_paginas;
-        }
-
-
-
-
-
-
-        public static function DevuelveUsuarios($pagina)
-        {
-            
-            $consulta="SELECT * FROM usuarios ;";
-
-            $tamano=4;
-            
-            
-            
-            $comienzo=($pagina-1)*$tamano;
-
-            
-            
-            
-
-
-
-            $resultado=self::$conn->prepare($consulta);
-            $resultado->execute(array());
-
-            
-
-            
-
         
 
-            
-
-            $resultado->closeCursor();
-
-            $consulta_con_limite="SELECT * FROM usuarios LIMIT $comienzo,$tamano";
-
-            
-            $resultado=self::$conn->prepare($consulta_con_limite);
-            $resultado->execute(array());
-
-           
-           
-            $a= new stdClass;
-            $a->usuarios=array();
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-
-                
-
-                $valores= new stdClass;
-                $valores->Id=$registro["Id"];
-                $valores->Email=$registro["Email"];
-                $valores->Nombre=$registro["Nombre"];
-                $valores->Ap1=$registro["Ap1"];
-                $valores->Ap2=$registro["Ap2"];
-                $valores->Fecha_nac=$registro["FechaNac"];
-                $valores->Rol=$registro["Rol"];
-
-                
-                array_push($a->usuarios,$valores);
-                
-            
-            
-            }
-            
-            $JSON=json_encode($a);
-            return $a;
-            
-
-        }
-
-        public static function DevuelveTematicas($pagina)
-        {
-            $consulta="SELECT * FROM tematica";
-
-            $tamano=4;
-
-            $comienzo=($pagina-1)*$tamano;
-
-            
-            
-            
-
-
-
-            $resultado=self::$conn->prepare($consulta);
-            $resultado->execute(array());
-
-            
-
-            
 
         
-
-            
-
-            $resultado->closeCursor();
-
-            $consulta_con_limite="SELECT * FROM tematica LIMIT $comienzo,$tamano";
-
-            
-            $resultado=self::$conn->prepare($consulta_con_limite);
-            $resultado->execute(array());
-
-            $a= new stdClass;
-            $a->tematicas=array();
-            while($registro=$resultado->fetch(PDO::FETCH_ASSOC))
-            {
-                
-
-                
-
-                $valores= new stdClass;
-                $valores->Id=$registro["Id"];
-                $valores->Tema=$registro["Tema"];
-                
-
-                
-                array_push($a->tematicas,$valores);
-                
-            
-            
-            }
-            $JSON=json_encode($a);
-            return $a;
-
-
-        }
-
-
-
-        public static function BorraUsuario($Id)
-        {
-            $consulta="DELETE FROM usuarios WHERE Id=${Id}";
-            $resultado=self::$conn->exec($consulta);
-            if($resultado)
-            {
-                return true;
-            }
-            else 
-            {
-                
-                var_dump(self::$conn->errorInfo());
-            }
-
-        }
-
-        public static function BorraUsuarioTemporal($id)
-        {
-            $consulta="DELETE FROM alumno_sin_confirmar WHERE passw=${id}";
-            $resultado=self::$conn->exec($consulta);
-            if($resultado==1)
-            {
-                return true;
-            }
-            else 
-            {
-                var_dump(self::$conn->errorInfo());
-            }
-        }
-
-        public static function BorraTematica($id)
-        {
-            $consulta="DELETE FROM tematica WHERE Id='${id}';";
-            $resultado=self::$conn->exec($consulta);
-            if($resultado==1)
-            {
-                return true;
-            }
-            else {
-                var_dump(self::$conn->errorInfo());
-            }
-        }
 
         
 

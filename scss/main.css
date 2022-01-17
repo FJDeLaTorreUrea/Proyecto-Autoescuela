@@ -362,11 +362,8 @@ td {
   background: #fff;
 }
 
-section label {
-  display: block;
-}
-
-section input[type="radio"] {
-  display: inline-block;
+section p {
+  text-align: left;
+  padding: 20px;
 }
 /*# sourceMappingURL=main.css.map */
